@@ -336,8 +336,9 @@ module.exports = function (webpackEnv) {
         ...(modules.webpackAliases || {}),
         // 文件路径别名
         '@': path.resolve(__dirname, '../src'),
-        //'@pages': path.resolve(__dirname, '../src/pages'),
-        //'@router': path.resolve(__dirname, '../src/router'),
+        '@store': path.resolve(__dirname, '../src/store'),
+        '@pages': path.resolve(__dirname, '../src/pages'),
+        '@router': path.resolve(__dirname, '../src/router'),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

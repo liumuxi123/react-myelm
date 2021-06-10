@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux'
-// import { hot } from 'react-hot-loader/root'
-// import Routes from '@router/index.js'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
