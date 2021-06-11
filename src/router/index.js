@@ -11,10 +11,9 @@ const SuspenseComponent = Component => props => {
   )
 }
 
-const HomeComponent = lazy(() => import("../pages/home"));
+const HomeComponent = lazy(() => import("../pages/home/home.jsx"));
 
-
-export default [
+const routers = [
   {
     component: BlankLayout,
     routes: [
@@ -42,3 +41,4 @@ export default [
     ]
   }
 ];
+export default routers
