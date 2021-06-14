@@ -27,6 +27,7 @@ module.exports = override(
     "@assets": pathResolve("./src/assets"),
     "@components": pathResolve("./src/components"),
     "@utils": pathResolve("./src/utils"),
+    "@api":pathResolve("./src/api"),
     "@layouts": pathResolve("./src/layouts"),
     "@pages": pathResolve("./src/pages"),
     "@store": pathResolve("./src/store"),

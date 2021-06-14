@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import "./header.less"
 
 
-export class header extends Component {
+export class Header extends Component {
   static propTypes = {
     title:PropTypes.string
   }
@@ -22,4 +22,4 @@ export class header extends Component {
   }
 }
 
-export default header
+export default Header
