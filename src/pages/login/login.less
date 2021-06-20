@@ -1,0 +1,58 @@
+@import "../../assets/style/variate.less";
+
+.login-wrap{
+    width: 100%;
+    .header{
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 0px 16px;
+        background-color: @primaty-color;
+        color: #FFF;
+        font-size: @font-size;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .header-icon{
+            font-size: 24px;
+        }
+    }
+    .login-form-wrap{
+        margin: 20px 0px;
+        .compose-input{
+            margin: 0px;
+            display: flex;
+            align-items: center;
+            .captchas-wrap{
+                width: 132px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                img{
+                    width: 80px;
+                    height: 100%;
+                }
+                .change-captchas{
+                    flex: 1;
+                    font-size: 12px;
+                    text-align: center;
+                }
+            }
+        }
+        .tip-text{
+            padding: 0px 15px;
+            color: #ff0000;
+            font-size: @font-size-mini;
+            line-height: 28px;
+        }
+        .login-button-wrap{
+            padding: 0px 15px;
+            margin: 10px 0px;
+            .login-button{
+                width: 100%;
+                background-color: @primaty-color;
+                color: #FFF;
+            }
+        }
+    }
+}

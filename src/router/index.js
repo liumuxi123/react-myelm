@@ -13,6 +13,7 @@ const SuspenseComponent = Component => props => {
 
 const HomeComponent = lazy(() => import("../pages/home/home.jsx"));
 const LoginComponent = lazy(() => import("../pages/login/login.jsx"));
+const ProfileComponent = lazy(() => import("../pages/profile/profile.jsx"));
 
 const routers = [
   {
@@ -40,6 +41,10 @@ const routers = [
           {
             path: "/login",
             component: SuspenseComponent(LoginComponent),
+          },
+          {
+            path: "/profile",
+            component: SuspenseComponent(ProfileComponent),
           }
         ]
       }
