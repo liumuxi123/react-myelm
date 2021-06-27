@@ -14,6 +14,8 @@ const SuspenseComponent = Component => props => {
 const HomeComponent = lazy(() => import("../pages/home/home.jsx"));
 const LoginComponent = lazy(() => import("../pages/login/login.jsx"));
 const ProfileComponent = lazy(() => import("../pages/profile/profile.jsx"));
+const CityComponent = lazy(() => import("../pages/city/city.jsx"));
+const MsiteComponent = lazy(() => import("../pages/msite/msite.jsx"));
 
 const routers = [
   {
@@ -45,6 +47,14 @@ const routers = [
           {
             path: "/profile",
             component: SuspenseComponent(ProfileComponent),
+          },
+          {
+            path: "/city/:id",
+            component: SuspenseComponent(CityComponent),
+          },
+          {
+            path: "/msite/:geohash",
+            component: SuspenseComponent(MsiteComponent),
           }
         ]
       }

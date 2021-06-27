@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { List, InputItem, Button } from 'antd-mobile';
+import { List, InputItem, Button, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { updateCaptchas, loginFun } from "@api/login";
 import IconFont from '@components/iconFont/iconFont.jsx'
@@ -11,8 +11,8 @@ import "./login.less";
 
 class login extends Component {
     static propTypes = {
-        userInfo:PropTypes.object.isRequired,
-        saveUserInfo:PropTypes.func.isRequired
+        userInfo: PropTypes.object.isRequired,
+        saveUserInfo: PropTypes.func.isRequired
     }
     state = {
         captchas: '',
@@ -23,9 +23,12 @@ class login extends Component {
     /** 更新验证码 */
     changeVerifyCode = async () => {
         const res = await updateCaptchas()
-        this.setState({
-            captchas: res.code
-        })
+        if (res.status !== 0) {
+            this.setState({
+                captchas: res.code
+            })
+        }
+
     }
     mobileLogin = async () => {
         // this.props.form.getFieldsValue()
@@ -33,12 +36,17 @@ class login extends Component {
             if (error) {
                 console.log(error);
                 return
-            }else{
+            } else {
                 const data = this.props.form.getFieldsValue()
                 const res = await loginFun(data)
-                this.props.saveUserInfo(res)
-                setStorage('user_id', res.user_id)
-                this.props.history.push('/profile')
+                if (res.status !== 0) {
+                    this.props.saveUserInfo(res)
+                    setStorage('user_id', res.user_id)
+                    this.props.history.push('/profile')
+                } else {
+                    Toast(res.message)
+                }
+
             }
         })
     }
@@ -103,14 +111,14 @@ class login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userInfo:state.userInfo
+        userInfo: state.userInfo
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        saveUserInfo:(userInfo) => dispatch(saveUserInfo(userInfo))
+        saveUserInfo: (userInfo) => dispatch(saveUserInfo(userInfo))
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(createForm()(login)) 
+export default connect(mapStateToProps, mapDispatchToProps)(createForm()(login))

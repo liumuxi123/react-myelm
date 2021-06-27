@@ -5,11 +5,7 @@ import IconFont from '@components/iconFont/iconFont.jsx'
 import { getCitys } from '@api/home/index.js'
 import "./home.less"
 
-const cityItems = (citys) => {
-  return citys.map((city, index) => {
-    return (<span className="city-item" key={index}>{city.name}</span>)
-  })
-}
+
 export default class home extends Component {
   state = {
     currentCity: {},
@@ -25,9 +21,11 @@ export default class home extends Component {
     const res = await getCitys({
       type: 'guess'
     })
-    this.setState({
-      currentCity: res
-    })
+    if (res.status !== 0) {
+      this.setState({
+        currentCity: res
+      })
+    }
   }
   getHotCity = async () => {
     const res = await getCitys({
@@ -45,7 +43,16 @@ export default class home extends Component {
       allCitys: res
     })
   }
+  setLocation = (id) => {
+    console.log(id);
+    this.props.history.push(`/city/${id}`)
+  }
   render() {
+    const cityItems = (citys) => {
+      return citys.map((city, index) => {
+        return (<span className="city-item" onClick={this.setLocation.bind(this,city.id)}  key={index}>{city.name}</span>)
+      })
+    }
     return (
       <div className="home-wrap">
         <Header leftsolt={<div>饿了么</div>}>
@@ -55,9 +62,9 @@ export default class home extends Component {
             <span className="city-tip-left">当前城市：</span>
             <span>定位不准时，请在城市列表中选择</span>
           </div>
-          <div className="city-location">
+          <div className="city-location" onClick={this.setLocation.bind(this,this.state.currentCity.id)}>
             <span className="city-location-name">{this.state.currentCity.name}</span>
-            <span><IconFont style={{fontSize:'22px'}} type="icon-arrow-right" /></span>
+            <span><IconFont style={{ fontSize: '22px' }} type="icon-arrow-right" /></span>
           </div>
         </div>
         <div className="city-content">
