@@ -1,0 +1,43 @@
+
+.msite-wrap{
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    .msite-contents{
+        flex: 1;
+        overflow-y: scroll;
+        .msite-navs-wrap{
+            width: 100%;
+            background-color: #fff;
+            border-bottom: 1px solid #e4e4e4;
+            height: 200px;
+            .category-outer-item{
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .category-item{
+                width: 25%;
+                height: 100px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .img-wrap{
+                    width: 42px;
+                    height: 42px;
+                    margin-bottom: 10px;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .name{
+                    color: #666;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
