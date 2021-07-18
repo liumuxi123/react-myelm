@@ -1,0 +1,29 @@
+@import "../../assets/style/variate.less";
+
+.footer-wrap {
+    width: 100%;
+    height: 45px;
+    border-top: 1px solid #ededed;
+    box-sizing: border-box;
+    background-color: #fff;
+    display: flex;
+
+    .footer-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        color: @font-color-gray;
+        font-size: @font-size-mini;
+
+        &.active {
+            color: @font-active-color;
+        }
+
+        .footer-icon {
+            font-size: @font-size-large;
+
+        }
+    }
+}

@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import IconFont from '@components/iconFont/iconFont.jsx'
-import { List, InputItem, Button, Toast } from 'antd-mobile';
+import { List, InputItem } from 'antd-mobile';
+import { saveAttrInfo } from '../../store/action';
+import PropTypes from "prop-types";
 import { getPosition, getCityInfo } from "@api/city";
 import { setStorage, getStorage, removeStorage } from "@utils/index.js";
 import './city.less'
 
-export default class city extends Component {
+class city extends Component {
+    static propTypes = {
+        saveAttrInfo:PropTypes.func.isRequired
+    }
     state = {
         cityId: '',
         cityName: '',
@@ -22,7 +28,7 @@ export default class city extends Component {
         const palceHistory = getStorage('placeHistory')
         if (palceHistory) {
             this.setState({
-                historyList:JSON.parse(palceHistory)
+                historyList: JSON.parse(palceHistory)
             })
         }
     }
@@ -46,11 +52,11 @@ export default class city extends Component {
         })
     }
     selectLocation = (item, type) => {
-        if (type == 'search') {
+        if (type === 'search') {
             // 保存到本地
             let hasFlag = false
             this.state.historyList.forEach((history) => {
-                if (history.geohash == item.geohash) {
+                if (history.geohash === item.geohash) {
                     hasFlag = true
                 }
             })
@@ -62,6 +68,7 @@ export default class city extends Component {
                 setStorage('placeHistory', JSON.stringify(this.state.historyList))
             }
         }
+        this.props.saveAttrInfo('geohash',item.geohash)
         this.props.history.push(`/msite/${item.geohash}`)
     }
     clearHistory = () => {
@@ -134,3 +141,11 @@ export default class city extends Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveAttrInfo: (attr, geohash) => dispatch(saveAttrInfo(attr, geohash))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(city)

@@ -9,7 +9,7 @@ let defaultState = {
     hasAddressList: [], // 已有的地址
     operate: 'edit',
     userInfo: {},
-    geohash: []
+    geohash: ''
 }
 
 // 用户消息
