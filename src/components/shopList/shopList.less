@@ -1,0 +1,137 @@
+@import "../../assets/style/variate.less";
+
+.restaurant-lists {
+  .restaurant-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+    border-bottom: 1px solid #eee;
+
+    .left-img {
+      width: 64px;
+      height: 64px;
+      margin-right: 10px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .right-info {
+      flex: 1;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .info-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .title-line {
+        .name {
+          width: 200px;
+          color: @font-color;
+          font-size: @font-size-large;
+          font-weight: 600;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+
+          &.premium::before {
+            content: "品牌";
+            display: inline-block;
+            font-size: @font-size-mini;
+            color: @font-color;
+            background-color: @font-color-yellow;
+            border-radius: 5px;
+            margin-right: 5px;
+            padding: 4px 5px;
+          }
+        }
+
+        .tags {
+          display: flex;
+          transform: scale(0.8);
+          font-size: @font-size-mini;
+          color: @font-color-gray;
+
+          .tag {
+            border: 1px solid #f1f1f1;
+            padding: 0 2px;
+            border-radius: 1px;
+            margin-left: 2px;
+          }
+        }
+      }
+
+      .starts-line {
+        .left {
+          display: flex;
+          align-items: center;
+          font-size: @font-size-mini;
+          color: @font-color-gray;
+
+          .rank-score {
+            font-size: @font-size;
+            color: @font-color-yellow;
+            margin-right: 5px;
+          }
+
+          .order {
+            transform: scale(0.8);
+          }
+        }
+
+        .right {
+          display: flex;
+        }
+
+        .delivery-mode {
+          display: inline-block;
+          transform: scale(0.8);
+          font-size: @font-size-mini;
+          color: #fff;
+          background-color: @font-active-color;
+          border: 1px solid @font-active-color;
+          border-radius: 1px;
+          margin-right: -5px;
+        }
+
+        .zhunshi {
+          display: inline-block;
+          transform: scale(0.8);
+          font-size: @font-size-mini;
+          color: @font-active-color;
+          border: 1px solid @font-active-color;
+          border-radius: 1px;
+        }
+      }
+
+      .delivery-line {
+        .min-prices {
+          text-align: left;
+          transform: scale(0.8);
+          font-size: @font-size-mini;
+          color: @font-color;
+        }
+        .right {
+          transform: scale(0.9);
+          font-size: @font-size-mini;
+          color: @font-color-gray;
+          .order_time {
+            color: @font-active-color;
+          }
+        }
+        .segmentation {
+          margin: 0px 5px;
+        }
+      }
+    }
+  }
+}

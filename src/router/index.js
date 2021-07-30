@@ -16,6 +16,9 @@ const LoginComponent = lazy(() => import("../pages/login/login.jsx"));
 const ProfileComponent = lazy(() => import("../pages/profile/profile.jsx"));
 const CityComponent = lazy(() => import("../pages/city/city.jsx"));
 const MsiteComponent = lazy(() => import("../pages/msite/msite.jsx"));
+const SearchComponent = lazy(() => import("../pages/search/search.jsx"));
+const OrderComponent = lazy(() => import("../pages/order/order.jsx"));
+const FoodComponent = lazy(() => import("../pages/food/food.jsx"));
 
 const routers = [
   {
@@ -55,7 +58,19 @@ const routers = [
           {
             path: "/msite/:geohash",
             component: SuspenseComponent(MsiteComponent),
-          }
+          },
+          {
+            path: "/food",
+            component: SuspenseComponent(FoodComponent),
+          },
+          {
+            path: "/search/:geohash",
+            component: SuspenseComponent(SearchComponent),
+          },
+          {
+            path: "/order/:geohash",
+            component: SuspenseComponent(OrderComponent),
+          },
         ]
       }
     ]
