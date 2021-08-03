@@ -8,7 +8,7 @@ export const saveUserInfo = (userInfo) => {
   }
 }
 
-// 修改用户信息
+// 修改其它信息
 export const saveAttrInfo = (datatype, value) => {
   return {
     type: user.SAVE_ATTRINFO,
