@@ -28,7 +28,6 @@ class login extends Component {
                 captchas: res.code
             })
         }
-
     }
     mobileLogin = async () => {
         // this.props.form.getFieldsValue()
