@@ -3,17 +3,18 @@ import { Redirect } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import BlankLayout from "../layouts/BlankLayout";
 
-const SuspenseComponent = Component => props => {
+const SuspenseComponent = (Component) => (props) => {
   return (
     <Suspense fallback={null}>
       <Component {...props}></Component>
     </Suspense>
-  )
-}
+  );
+};
 
 const HomeComponent = lazy(() => import("../pages/home/home.jsx"));
 const LoginComponent = lazy(() => import("../pages/login/login.jsx"));
 const ProfileComponent = lazy(() => import("../pages/profile/profile.jsx"));
+const ProfileInfoComponent = lazy(() => import("../pages/profile/children/info/info.jsx"));
 const CityComponent = lazy(() => import("../pages/city/city.jsx"));
 const MsiteComponent = lazy(() => import("../pages/msite/msite.jsx"));
 const SearchComponent = lazy(() => import("../pages/search/search.jsx"));
@@ -31,17 +32,11 @@ const routers = [
           {
             path: "/",
             exact: true,
-            render: () => <Redirect to={"/home"} />
+            render: () => <Redirect to={"/home"} />,
           },
           {
             path: "/home",
             component: SuspenseComponent(HomeComponent),
-            // routes: [
-            //   {
-            //     path: "/recommend/:id",
-            //     component: SuspenseComponent(AlbumComponent)
-            //   }
-            // ]
           },
           {
             path: "/login",
@@ -50,6 +45,12 @@ const routers = [
           {
             path: "/profile",
             component: SuspenseComponent(ProfileComponent),
+            children: [
+              {
+                path: "/info",
+                component: SuspenseComponent(ProfileInfoComponent)
+              }
+            ]
           },
           {
             path: "/city/:id",
@@ -71,9 +72,9 @@ const routers = [
             path: "/order/:geohash",
             component: SuspenseComponent(OrderComponent),
           },
-        ]
-      }
-    ]
-  }
+        ],
+      },
+    ],
+  },
 ];
-export default routers
+export default routers;

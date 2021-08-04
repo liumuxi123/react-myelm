@@ -4,6 +4,7 @@ import Footer from '@components/footer/footer.jsx'
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { renderRoutes } from "react-router-config";
 import "./profile.less"
 
 class profile extends Component {
@@ -25,7 +26,7 @@ class profile extends Component {
           <span></span>
         </div>
         <div className="profile-contents">
-          <section className="base-info">
+          <Link to="/profile/info" className="base-info">
             <div className="left">
               <div className="avatar">
                 {
@@ -44,7 +45,7 @@ class profile extends Component {
             <div className="right">
               <IconFont type="icon-arrow-right" className="right-icon" />
             </div>
-          </section>
+          </Link>
           <section className="info-data">
             <Link className="info-item" to="/">
               <div className="top-number">
@@ -105,7 +106,7 @@ class profile extends Component {
             </Link>
             <Link to="/" className="list-item">
               <div className="list-item-left">
-                <IconFont type="icon-elment" className="list-icon" style={ {fontSize:'22px'}} />
+                <IconFont type="icon-elment" className="list-icon" style={{ fontSize: '22px' }} />
                 <span>下载饿了么APP</span>
               </div>
               <IconFont type="icon-arrow-right" className="list-right-icon" />
@@ -113,6 +114,7 @@ class profile extends Component {
           </section>
         </div>
         <Footer />
+        {renderRoutes(this.props.route.children)}
       </div>
     )
   }
