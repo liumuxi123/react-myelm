@@ -70,7 +70,7 @@ class search extends Component {
   clearHistory = () => {
     this.props.saveAttrInfo('searchHistory', [])
   }
-  deleteHistory = (e,val) => {
+  deleteHistory = (e, val) => {
     console.log(e, val);
     e.stopPropagation()
     let index = -1
@@ -111,7 +111,7 @@ class search extends Component {
                 this.state.restaurants && this.state.restaurants.length > 0 ? (<div>
                   <h3>商家</h3>
                   <div className="restaurant-content">
-                    <ShopList data={this.state.restaurants} />
+                    <ShopList data={this.state.restaurants} geohash={this.state.geohash} />
                   </div>
                 </div>) : (<div className="no-data">抱歉，暂无搜索结果</div>)
               }

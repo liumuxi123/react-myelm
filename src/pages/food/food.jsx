@@ -21,7 +21,7 @@ export default class food extends Component {
       geohash: query.geohash
     })
     this.getCategoryData(query.geohash)
-    query.geohash && this.getRestaurantsData(query.geohash,query.categoryId)
+    query.geohash && this.getRestaurantsData(query.geohash, query.categoryId)
   }
   getCategoryData = async (geohash) => {
     console.log(geohash);
@@ -40,11 +40,11 @@ export default class food extends Component {
       })
     }
   }
-  getRestaurantsData = async (geohash,categoryId) => {
+  getRestaurantsData = async (geohash, categoryId) => {
     const params = {
       latitude: geohash.split(',')[0],
       longitude: geohash.split(',')[1],
-      restaurant_category_id:categoryId
+      restaurant_category_id: categoryId
     }
     const res = await getRestaurants(params)
     if (res.status !== 0) {
@@ -82,7 +82,7 @@ export default class food extends Component {
           </li>
         </div>
         <div className="food-contents">
-          <ShopList data={this.state.restaurants} />
+          <ShopList data={this.state.restaurants} geohash={this.state.geohash} />
         </div>
       </div>
     )

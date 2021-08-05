@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './shopList.less'
+import { Link } from "react-router-dom";
 
 export default class shopList extends Component {
   static propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    geohash:PropTypes.string.isRequired
   }
   state = {
     imgBaseUrl2: "//elm.cangdu.org/img/"
@@ -28,7 +30,7 @@ export default class shopList extends Component {
       <div className="restaurant-lists">
         {
           this.props.data && this.props.data.map((item, index) => {
-            return (<div className="restaurant-item" key={index}>
+            return (<Link to={{ pathname: '/shop', query: { geohash: this.props.geohash, id: item.id } }} className="restaurant-item" key={index}>
               <div className="left-img"><img src={this.state.imgBaseUrl2 + item.image_path} alt="" /></div>
               <div className="right-info">
                 <div className="title-line info-line">
@@ -73,7 +75,7 @@ export default class shopList extends Component {
                   </div>
                 </div>
               </div>
-            </div>)
+            </Link>)
           })
         }
       </div>

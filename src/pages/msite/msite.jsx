@@ -72,10 +72,10 @@ export default class msite extends Component {
 
   }
   getCategoryId = (url) => {
-    let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
+    let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name', ''));
     if (/restaurant_category_id/gi.test(urlData)) {
       return JSON.parse(urlData).restaurant_category_id.id
-    }else{
+    } else {
       return ''
     }
   }
@@ -97,7 +97,7 @@ export default class msite extends Component {
                   return (<SwiperSlide className="category-outer-item" key={outIndex} >
                     {
                       outItem.map((item, index) => {
-                        return (<Link className="category-item" key={index} to={{ pathname: '/food', query: {geohash: this.state.geohash,title: item.title,categoryId:this.getCategoryId(item.link)}}} >
+                        return (<Link className="category-item" key={index} to={{ pathname: '/food', query: { geohash: this.state.geohash, title: item.title, categoryId: this.getCategoryId(item.link) } }} >
                           <div className="img-wrap">
                             <img src={this.state.imgBaseUrl + item.image_url} alt="" />
                           </div>
@@ -113,7 +113,7 @@ export default class msite extends Component {
           <div className="line"></div>
           <div className="restaurant-wrap">
             <div className="title"><IconFont className="title-icon" type="icon-inspection" /> 附近商家</div>
-            <ShopList data={this.state.restaurants} />
+            <ShopList data={this.state.restaurants} geohash={this.state.geohash} />
           </div>
         </div>
         <Footer />

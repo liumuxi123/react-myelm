@@ -25,6 +25,7 @@ const MsiteComponent = lazy(() => import("../pages/msite/msite.jsx"));
 const SearchComponent = lazy(() => import("../pages/search/search.jsx"));
 const OrderComponent = lazy(() => import("../pages/order/order.jsx"));
 const FoodComponent = lazy(() => import("../pages/food/food.jsx"));
+const ShopComponent = lazy(() => import("../pages/shop/shop.jsx"));
 
 const routers = [
   {
@@ -94,6 +95,10 @@ const routers = [
           {
             path: "/order/:geohash",
             component: SuspenseComponent(OrderComponent),
+          },
+          {
+            path: "/shop",
+            component: SuspenseComponent(ShopComponent),
           },
         ],
       },
