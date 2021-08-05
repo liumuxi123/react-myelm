@@ -4,12 +4,12 @@ import Footer from '@components/footer/footer.jsx'
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { renderRoutes } from "react-router-config";
 import "./profile.less"
 
 class profile extends Component {
   static propTypes = {
-    userInfo: PropTypes.object.isRequired
+    userInfo: PropTypes.object.isRequired,
+    geohash: PropTypes.string.isRequired
   }
   state = {
     imgBaseUrl: '//elm.cangdu.org/img/'
@@ -26,13 +26,12 @@ class profile extends Component {
           <span></span>
         </div>
         <div className="profile-contents">
-          <Link to="/profile/info" className="base-info">
+          <Link to="/profile-info" className="base-info">
             <div className="left">
               <div className="avatar">
                 {
                   this.props.userInfo && this.props.userInfo.user_id ? (<img src={`${this.state.imgBaseUrl}${this.props.userInfo.avatar}`} alt="" />) : (<IconFont className="avatar-icon" type="icon-wode" />)
                 }
-                {/* <IconFont className="avatar-icon" type="icon-wode" /> */}
               </div>
               <div className="account">
                 <div className="username account-item">{this.props.userInfo.username || '登录|注册'}</div>
@@ -47,7 +46,7 @@ class profile extends Component {
             </div>
           </Link>
           <section className="info-data">
-            <Link className="info-item" to="/">
+            <Link className="info-item" to="/balance">
               <div className="top-number">
                 <span className="num">{this.props.userInfo.balance ? parseInt(this.props.userInfo.balance).toFixed(2) : 0.00}</span>
                 <span className="unit">元</span>
@@ -56,7 +55,7 @@ class profile extends Component {
                 我的余额
               </div>
             </Link>
-            <Link className="info-item" to="/">
+            <Link className="info-item" to="/benefit">
               <div className="top-number">
                 <span className="num" style={{ color: '#ff5f3e' }}>{this.props.userInfo.gift_amount || 0}</span>
                 <span className="unit">个</span>
@@ -65,7 +64,7 @@ class profile extends Component {
                 我的优惠
               </div>
             </Link>
-            <Link className="info-item" to="/">
+            <Link className="info-item" to="/points">
               <div className="top-number">
                 <span className="num" style={{ color: '#6ac20b' }}>{this.props.userInfo.point || 0}</span>
                 <span className="unit">分</span>
@@ -76,45 +75,44 @@ class profile extends Component {
             </Link>
           </section>
           <section className="profile-list">
-            <Link to="/" className="list-item">
+            <Link to={`/order/${this.props.geohash}`} className="list-item">
               <div className="list-item-left">
                 <IconFont type="icon-dingdan" className="list-icon" />
                 <span>我的订单</span>
               </div>
               <IconFont type="icon-arrow-right" className="list-right-icon" />
             </Link>
-            <Link to="/" className="list-item">
+            <div className="list-item">
               <div className="list-item-left">
                 <IconFont type="icon-shangchengdingdan" className="list-icon" />
                 <span>积分商城</span>
               </div>
               <IconFont type="icon-arrow-right" className="list-right-icon" />
-            </Link>
-            <Link to="/" className="list-item">
+            </div>
+            <Link to="/vipcard" className="list-item">
               <div className="list-item-left">
                 <IconFont type="icon-huiyuan" className="list-icon" />
                 <span>饿了么会员卡</span>
               </div>
               <IconFont type="icon-arrow-right" className="list-right-icon" />
             </Link>
-            <Link to="/" className="list-item">
+            <Link to="/service" className="list-item">
               <div className="list-item-left">
                 <IconFont type="icon-fuwuzhongxin" className="list-icon" />
                 <span>服务中心</span>
               </div>
               <IconFont type="icon-arrow-right" className="list-right-icon" />
             </Link>
-            <Link to="/" className="list-item">
+            <div className="list-item">
               <div className="list-item-left">
                 <IconFont type="icon-elment" className="list-icon" style={{ fontSize: '22px' }} />
                 <span>下载饿了么APP</span>
               </div>
               <IconFont type="icon-arrow-right" className="list-right-icon" />
-            </Link>
+            </div>
           </section>
         </div>
         <Footer />
-        {renderRoutes(this.props.route.children)}
       </div>
     )
   }
@@ -122,7 +120,8 @@ class profile extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
+    geohash: state.geohash
   }
 }
 

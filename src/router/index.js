@@ -14,7 +14,12 @@ const SuspenseComponent = (Component) => (props) => {
 const HomeComponent = lazy(() => import("../pages/home/home.jsx"));
 const LoginComponent = lazy(() => import("../pages/login/login.jsx"));
 const ProfileComponent = lazy(() => import("../pages/profile/profile.jsx"));
-const ProfileInfoComponent = lazy(() => import("../pages/profile/children/info/info.jsx"));
+const ProfileInfoComponent = lazy(() =>import("../pages/profile/children/info/info.jsx"));
+const ProfileBalanceComponent = lazy(() =>import("../pages/profile/children/balance/balance.jsx"));
+const ProfileBenefitComponent = lazy(() =>import("../pages/profile/children/benefit/benefit.jsx"));
+const ProfilePointsComponent = lazy(() =>import("../pages/profile/children/points/points.jsx"));
+const ProfileVIPComponent = lazy(() =>import("../pages/profile/children/vipcard/vipcard.jsx"));
+const ProfileServiceComponent = lazy(() =>import("../pages/profile/children/service/service.jsx"));
 const CityComponent = lazy(() => import("../pages/city/city.jsx"));
 const MsiteComponent = lazy(() => import("../pages/msite/msite.jsx"));
 const SearchComponent = lazy(() => import("../pages/search/search.jsx"));
@@ -45,12 +50,30 @@ const routers = [
           {
             path: "/profile",
             component: SuspenseComponent(ProfileComponent),
-            children: [
-              {
-                path: "/info",
-                component: SuspenseComponent(ProfileInfoComponent)
-              }
-            ]
+          },
+          {
+            path: "/profile-info",
+            component: SuspenseComponent(ProfileInfoComponent),
+          },
+          {
+            path: "/balance",
+            component: SuspenseComponent(ProfileBalanceComponent),
+          },
+          {
+            path: "/benefit",
+            component: SuspenseComponent(ProfileBenefitComponent),
+          },
+          {
+            path: "/points",
+            component: SuspenseComponent(ProfilePointsComponent),
+          },
+          {
+            path: "/vipcard",
+            component: SuspenseComponent(ProfileVIPComponent),
+          },
+          {
+            path: "/service",
+            component: SuspenseComponent(ProfileServiceComponent),
           },
           {
             path: "/city/:id",
