@@ -97,7 +97,61 @@ export default class shop extends Component {
               }
             </div>
             <div className="goods-wrap">
-              
+              <div className="header">
+                <span className="name">{this.state.foodMenuList[this.state.activeMenuIndex] ? this.state.foodMenuList[this.state.activeMenuIndex].name : ''}</span>
+                <span>{this.state.foodMenuList[this.state.activeMenuIndex] ? this.state.foodMenuList[this.state.activeMenuIndex].description : ''}</span>
+              </div>
+              <div className="food-list">
+                {
+                  this.state.foodList && this.state.foodList.map((food, fIndex) => {
+                    return (<li key={fIndex} className="food-item">
+                      <section className="food-img">
+                        <img src={`${this.state.imgBaseUrl}${food.image_path}`} alt="" />
+                      </section>
+                      <section className="food-des">
+                        <div className="name-header">
+                          <div className="name">{food.name}</div>
+                          {
+                            food.attributes && food.attributes.length > 0 ? (<ul>
+                              {
+                                food.attributes && food.attributes.map((attri, aIndex) => {
+                                  if (attri) {
+                                    return (<li key={aIndex} className="attr-item" style={{ color: attri.icon_name === '新' ? '#0094f5' : '#' + attri.icon_color, borderColor: '#' + attri.icon_color }}>
+                                      {attri.icon_name === '新' ? '新品' : attri.icon_name}
+                                    </li>)
+                                  } else {
+                                    return ''
+                                  }
+                                })
+                              }
+                            </ul>) : ''
+                          }
+                        </div>
+                        <p className="des-content">{food.description}</p>
+                        <p className="sale-rank">
+                          <span>月售{food.month_sales}份</span>
+                          <span>好评率{food.satisfy_rate}%</span>
+                        </p>
+                        {
+                          food.activity ? (<p className="food_activity">
+                            <span style={{ color: '#' + food.activity.image_text_color, borderColor: '#' + food.activity.icon_color }}>{food.activity.image_text}</span>
+                          </p>) : ''
+                        }
+                        <div className="price-buycard">
+                          <section className="food-price">
+                            <span>¥</span>
+                            <span className="price">{food.specfoods[0].price}</span>
+                            {
+                              food.specifications && food.specifications.length > 0 ? (<span style={{color:'#666'}}>起</span>) : ''
+                            }
+                          </section>
+                          <div className="buycard"></div>
+                        </div>
+                      </section>
+                    </li>)
+                  })
+                }
+              </div>
             </div>
           </div>
           <div className="shop-comments">
