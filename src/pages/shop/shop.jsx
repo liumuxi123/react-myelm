@@ -84,7 +84,7 @@ export default class shop extends Component {
           { title: '商品' },
           { title: '评价' }
         ]}
-          initialPage={1}
+          initialPage={0}
         >
           <div className="shop-goods">
             <div className="category-wrap">
