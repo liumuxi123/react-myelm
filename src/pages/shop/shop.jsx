@@ -12,7 +12,8 @@ export default class shop extends Component {
     shopDetail: {},
     foodMenuList: [],
     foodList: [],
-    activeMenuIndex: 0
+    activeMenuIndex: 0,
+    ratingScoresData: {}
   }
   componentDidMount() {
     const query = this.props.location.query
@@ -25,25 +26,25 @@ export default class shop extends Component {
   }
   getShopDetailInfo = async (id) => {
     const res = await getShopDetail(id)
-    if (res.status !== 0) {
-      console.log(res);
-      this.setState({
-        shopDetail: res
-      })
-    }
+    // if (res.status !== 0) {
+    //   console.log(res);
+    //   this.setState({
+    //     shopDetail: res
+    //   })
+    // }
+    this.setState({
+      shopDetail: res
+    })
   }
   getfoodData = async (id) => {
     const params = {
       restaurant_id: id
     }
     const res = await getfoodList(params)
-    if (res.status !== 0) {
-      console.log(res);
-      this.setState({
-        foodMenuList: res,
-        foodList: res[0].foods
-      })
-    }
+    this.setState({
+      foodMenuList: res,
+      foodList: res[0].foods
+    })
   }
   menuChange = (index) => {
     const foodList = this.state.foodMenuList[index] && this.state.foodMenuList[index].foods
@@ -142,7 +143,7 @@ export default class shop extends Component {
                             <span>¥</span>
                             <span className="price">{food.specfoods[0].price}</span>
                             {
-                              food.specifications && food.specifications.length > 0 ? (<span style={{color:'#666'}}>起</span>) : ''
+                              food.specifications && food.specifications.length > 0 ? (<span style={{ color: '#666' }}>起</span>) : ''
                             }
                           </section>
                           <div className="buycard"></div>
@@ -155,7 +156,13 @@ export default class shop extends Component {
             </div>
           </div>
           <div className="shop-comments">
-            Content of second tab
+            <section className="comments-abstract">
+              <div className="rating-left">
+                <p>{this.state.shopDetailData.rating}</p>
+                <p>综合评价</p>
+                <p>高于周边商家{((this.state.ratingScoresData.compare_rating || 0) * 100).toFixed(1)}%</p>
+              </div>
+            </section>
           </div>
         </Tabs>
       </div>
