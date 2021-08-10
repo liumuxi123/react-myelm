@@ -15,7 +15,14 @@ export function getfoodList(params) {
   return request({
     url: `/api/shopping/v2/menu`,
     method: "get",
-    params
+    params,
   });
 }
 
+export function getRateScores(shopid, params) {
+  return request({
+    url: `/api/ugc/v2/restaurants/${shopid}/ratings/scores`,
+    method: "get",
+    params,
+  });
+}

@@ -1,0 +1,19 @@
+@import "../../assets/style/variate.less";
+
+.star-wrap {
+  display: inline-block;
+  .star-icon {
+    display: inline-block;
+    width: 10px;
+    margin-right: 2px;
+    .icon-star-style {
+      color: #ddd;
+      font-size: 12px;
+    }
+    &.active {
+      .icon-star-style {
+        color: #ff9a0d;
+      }
+    }
+  }
+}

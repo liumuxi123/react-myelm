@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import IconFont from '@components/iconFont/iconFont.jsx'
-import { getShopDetail, getfoodList } from '@api/shop'
+import { getShopDetail, getfoodList, getRateScores } from '@api/shop'
 import { Tabs } from 'antd-mobile';
+import RatingStar from '@components/ratingStar/ratingStar.jsx'
 import './shop.less'
 
 export default class shop extends Component {
@@ -23,6 +24,7 @@ export default class shop extends Component {
     })
     query.id && this.getShopDetailInfo(query.id)
     query.id && this.getfoodData(query.id)
+    query.id && this.getshopRatingScore(query.id)
   }
   getShopDetailInfo = async (id) => {
     const res = await getShopDetail(id)
@@ -44,6 +46,13 @@ export default class shop extends Component {
     this.setState({
       foodMenuList: res,
       foodList: res[0].foods
+    })
+  }
+  getshopRatingScore = async (id) => {
+    const res = await getRateScores(id)
+    console.log(res);
+    this.setState({
+      ratingScoresData: res,
     })
   }
   menuChange = (index) => {
@@ -158,14 +167,30 @@ export default class shop extends Component {
           <div className="shop-comments">
             <section className="comments-abstract">
               <div className="rating-left">
-                <p>{this.state.shopDetailData.rating}</p>
+                <p>{this.state.shopDetail.rating}</p>
                 <p>综合评价</p>
                 <p>高于周边商家{((this.state.ratingScoresData.compare_rating || 0) * 100).toFixed(1)}%</p>
               </div>
             </section>
+            <section className="rating-right">
+              <div>
+                <span>服务态度</span>
+                <RatingStar rating={this.state.ratingScoresData.service_score || 3}></RatingStar>
+                <span className="rating-num">{(this.state.ratingScoresData.service_score || 0).toFixed(1)}</span>
+              </div>
+              <div>
+                <span>菜品评价</span>
+                <RatingStar rating={this.state.ratingScoresData.food_score || 0}></RatingStar>
+                <span className="rating-num">{(this.state.ratingScoresData.food_score || 0).toFixed(1)}</span>
+              </div>
+              <div>
+                <span>送达时间</span>
+                <span className="delivery-time">{this.state.shopDetail.order_lead_time}分钟</span>
+              </div>
+            </section>
           </div>
-        </Tabs>
-      </div>
+        </Tabs >
+      </div >
     )
   }
 }
